@@ -57,13 +57,14 @@ public class AlbumController {
             tableView.getItems().add(allAlbums);
         }
     }
-   /*
+
     public void fillRank(){
-        rankText = new
-        rankingTextArea.setText();
+       // String rankText = new String(selectionModel);
+
+       // rankingTextArea.setText(rankText);
 
     }
-*/
+
     public void fillTitle(){
 
     }
