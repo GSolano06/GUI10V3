@@ -2,6 +2,8 @@ package com.example.gui10v3;
 
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.control.cell.TextFieldTableCell;
+import javafx.util.converter.IntegerStringConverter;
 
 
 public class AlbumController {
@@ -42,14 +44,26 @@ public class AlbumController {
         column6.setCellValueFactory(new PropertyValueFactory<>("genre"));
         column7.setCellValueFactory(new PropertyValueFactory<>("totalCertifiedCopies"));
 
+        // supposed to make editable
+        column1.setCellFactory(TextFieldTableCell.forTableColumn(new IntegerStringConverter()));
+        column2.setCellFactory(TextFieldTableCell.forTableColumn());
+        column3.setCellFactory(TextFieldTableCell.forTableColumn());
+        column4.setCellFactory(TextFieldTableCell.forTableColumn());
+     //   column5.setCellFactory(TextFieldTableCell.forTableColumn(new IntegerStringConverter()));
+     //  column6.setCellFactory(TextFieldTableCell.forTableColumn());
+       //column7.setCellFactory(TextFieldTableCell.forTableColumn(new Float()StringConverter()));
+
         for (Album allAlbums : Album.getAllAlbums()) {
             tableView.getItems().add(allAlbums);
         }
     }
+   /*
     public void fillRank(){
+        rankText = new
+        rankingTextArea.setText();
 
     }
-
+*/
     public void fillTitle(){
 
     }

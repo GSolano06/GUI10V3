@@ -19,7 +19,7 @@ public class Album extends Music {
     }
 
     public String getGenre() {return genre;}
-    public Integer getReportedSales() {
+    public Integer getTotalReportedSales() {
         return reportedSales;
     }
     public Float getTotalCertifiedCopies() {
@@ -28,6 +28,8 @@ public class Album extends Music {
     public static ArrayList<Album> getAllAlbums(){
         return allAlbums;
     }
+
+
 
     public String toString(){
     return "Album title: " + getTitle()+ " Artist: " + getArtist()+ " Year: " + getYear() + " Genre: " + getGenre() + " Total Copies Sold: " + reportedSales + " Rank: " + getRank()+ " Total Certified Copies: "+ getTotalCertifiedCopies();

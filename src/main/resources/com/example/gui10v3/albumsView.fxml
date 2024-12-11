@@ -7,11 +7,13 @@
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
 
 
 <Pane fx:id="pane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.gui10v3.AlbumController">
    <children>
-      <TableView fx:id="tableView" layoutX="14.0" layoutY="59.0" prefHeight="313.0" prefWidth="373.0">
+      <TableView fx:id="tableView" layoutX="14.0" layoutY="59.0" prefHeight="313.0" prefWidth="401.0">
         <columns>
           <TableColumn fx:id="column1" prefWidth="41.0" text="Rank" />
           <TableColumn fx:id="column2" prefWidth="109.0" text="Title" />
@@ -23,7 +25,7 @@
         </columns>
       </TableView>
       <TextField fx:id="searchBar" layoutX="14.0" layoutY="22.0" promptText="Search Albums" />
-      <VBox fx:id="vBox" alignment="TOP_CENTER" layoutX="406.0" layoutY="60.0" prefHeight="297.0" prefWidth="174.0" spacing="5.0">
+      <VBox fx:id="vBox" alignment="TOP_CENTER" layoutX="427.0" layoutY="81.0" prefHeight="289.0" prefWidth="152.0" spacing="5.0">
          <children>
             <Label fx:id="rankingLabel" text="Ranking" />
             <TextArea fx:id="rankingTextArea" editable="false" prefHeight="44.0" prefWidth="200.0" wrapText="true" />
@@ -35,5 +37,10 @@
             <TextArea fx:id="yearTextArea" editable="false" prefHeight="44.0" prefWidth="200.0" wrapText="true" />
          </children>
       </VBox>
+      <Text layoutX="439.0" layoutY="57.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Quick View" textAlignment="CENTER">
+         <font>
+            <Font size="27.0" />
+         </font>
+      </Text>
    </children>
 </Pane>
