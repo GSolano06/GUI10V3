@@ -1,16 +1,36 @@
-toursView.fxml<?xml version="1.0" encoding="UTF-8"?>
-
-<?import javafx.geometry.Insets?>
-<?import javafx.scene.control.Label?>
-<?import javafx.scene.layout.VBox?>
+<?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.Button?>
-<VBox alignment="CENTER" spacing="20.0" xmlns:fx="http://javafx.com/fxml"
-      fx:controller="com.example.gui10v3.HelloController">
-    <padding>
-        <Insets bottom="20.0" left="20.0" right="20.0" top="20.0"/>
-    </padding>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.MenuButton?>
+<?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.StackPane?>
 
-    <Label fx:id="welcomeText"/>
-    <Button text="Hello!" onAction="#onHelloButtonClick"/>
-</VBox>
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="330.0" prefWidth="601.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <TextField layoutX="205.0" layoutY="21.0" prefHeight="26.0" prefWidth="159.0" />
+      <Label layoutX="145.0" layoutY="25.0" text="Rank" />
+      <Button layoutX="134.0" layoutY="254.0" mnemonicParsing="false" prefHeight="62.0" prefWidth="102.0" text="Previous" />
+      <Button layoutX="308.0" layoutY="254.0" mnemonicParsing="false" prefHeight="62.0" prefWidth="112.0" text="Next" />
+      <TextField layoutX="205.0" layoutY="61.0" prefHeight="26.0" prefWidth="159.0" />
+      <Label layoutX="145.0" layoutY="65.0" text="Artist" />
+      <MenuButton layoutX="14.0" layoutY="8.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="112.0" text="File">
+        <items>
+          <MenuItem mnemonicParsing="false" text="Action 1" />
+          <MenuItem mnemonicParsing="false" text="Action 2" />
+        </items>
+      </MenuButton>
+      <StackPane layoutX="387.0" layoutY="61.0" prefHeight="150.0" prefWidth="200.0">
+         <children>
+            <Button mnemonicParsing="false" style="-fx-background-color: transparent;" text="Upload Image" textFill="#2139b5" />
+            <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" />
+         </children>
+      </StackPane>
+      <TextArea layoutX="185.0" layoutY="124.0" prefHeight="122.0" prefWidth="200.0" />
+      <Label layoutX="264.0" layoutY="98.0" text="Full Info" />
+   </children>
+</Pane>
