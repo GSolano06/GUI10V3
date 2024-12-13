@@ -8,12 +8,12 @@ import javafx.util.converter.IntegerStringConverter;
 
 public class AlbumController {
     // table stuff
-    public TableView tableView;
-    public TableColumn<Music, Integer> column1; // rank
-    public TableColumn<Music, String> column2; // title
-    public TableColumn<Music, String> column3; // artist
-    public TableColumn<Music, String> column4; // year
-    public TableColumn<Album, String> column5; // r s
+    public TableView<Album> tableView;
+    public TableColumn<Album, Integer> column1; // rank
+    public TableColumn<Album, String> column2; // title
+    public TableColumn<Album, String> column3; // artist
+    public TableColumn<Album, String> column4; // year
+    public TableColumn<Album, Integer> column5; // r s
     public TableColumn<Album, String> column6; // genre
     public TableColumn<Album, String> column7; // total cert copies
 
@@ -45,35 +45,69 @@ public class AlbumController {
         column7.setCellValueFactory(new PropertyValueFactory<>("totalCertifiedCopies"));
 
         // supposed to make editable
+
         column1.setCellFactory(TextFieldTableCell.forTableColumn(new IntegerStringConverter()));
         column2.setCellFactory(TextFieldTableCell.forTableColumn());
         column3.setCellFactory(TextFieldTableCell.forTableColumn());
         column4.setCellFactory(TextFieldTableCell.forTableColumn());
-     //   column5.setCellFactory(TextFieldTableCell.forTableColumn(new IntegerStringConverter()));
-     //  column6.setCellFactory(TextFieldTableCell.forTableColumn());
-       //column7.setCellFactory(TextFieldTableCell.forTableColumn(new Float()StringConverter()));
+
+        column1.setOnEditCommit(
+                (TableColumn.CellEditEvent<Album, Integer> t)  -> {
+            int selectedRow = t.getTablePosition().getRow();
+            Album selectedAlbum = t.getTableView().getItems().get(selectedRow);
+            selectedAlbum.setRank(t.getNewValue());
+            updateTextFields();
+        }
+        );
+
+        column2.setOnEditCommit(
+                (TableColumn.CellEditEvent<Album, String> t)  -> {
+                    int selectedRow = t.getTablePosition().getRow();
+                    Album selectedAlbum = t.getTableView().getItems().get(selectedRow);
+                    selectedAlbum.setTitle(t.getNewValue());
+                    updateTextFields();
+                }
+        );
+
+        column3.setOnEditCommit(
+                (TableColumn.CellEditEvent<Album, String> t)  -> {
+                    int selectedRow = t.getTablePosition().getRow();
+                    Album selectedAlbum = t.getTableView().getItems().get(selectedRow);
+                    selectedAlbum.setArtist(t.getNewValue());
+                    updateTextFields();
+                }
+        );
+
+        column4.setOnEditCommit(
+                (TableColumn.CellEditEvent<Album, String> t)  -> {
+                    int selectedRow = t.getTablePosition().getRow();
+                    Album selectedAlbum = t.getTableView().getItems().get(selectedRow);
+                    selectedAlbum.setYear(t.getNewValue());
+                    updateTextFields();
+                }
+        );
 
         for (Album allAlbums : Album.getAllAlbums()) {
             tableView.getItems().add(allAlbums);
         }
+
+        tableView.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
+            updateTextFields();
+        } );
     }
 
-    public void fillRank(){
-       // String rankText = new String(selectionModel);
-
-       // rankingTextArea.setText(rankText);
-
+   public void updateTextFields() {
+     Album selectedAlbum =  tableView.getSelectionModel().getSelectedItem();
+        System.out.println("ListView select newValue: " + selectedAlbum);
+        if (selectedAlbum != null) {
+            rankingTextArea.setText(String.valueOf(selectedAlbum.getRank()));
+            titleTextArea.setText(String.valueOf(selectedAlbum.getTitle()));
+            artistTextArea.setText(String.valueOf(selectedAlbum.getArtist()));
+            yearTextArea.setText(String.valueOf(selectedAlbum.getYear()));
+        } else {
+            rankingTextArea.setText("");
+            titleTextArea.setText("");
+        }
     }
+        }
 
-    public void fillTitle(){
-
-    }
-
-    public void fillArtist(){
-
-    }
-
-    public void fillYear(){
-
-    }
-}

@@ -13,7 +13,7 @@
 
 <Pane fx:id="pane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.gui10v3.AlbumController">
    <children>
-      <TableView fx:id="tableView" layoutX="14.0" layoutY="59.0" prefHeight="313.0" prefWidth="401.0">
+      <TableView fx:id="tableView" editable="true" layoutX="14.0" layoutY="59.0" prefHeight="313.0" prefWidth="401.0">
         <columns>
           <TableColumn fx:id="column1" prefWidth="41.0" text="Rank" />
           <TableColumn fx:id="column2" prefWidth="109.0" text="Title" />
