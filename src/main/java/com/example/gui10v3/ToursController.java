@@ -21,14 +21,23 @@ public class ToursController {
     public TextField grossField;
     public TextField yearField;
     public TextField showField;
+    public TextField dataCounter;
 
-   // Tours.readAllData();
-   // Tours.describeAllTours();
-
+    static int currentTourNumber = 0;
 
     public void initialize() throws Exception{
         Tours.readAllData();
 
+        Tours firstTour = Tours.getAllTours().get(currentTourNumber);
+        rankField.setText(String.valueOf(firstTour.getRank()));
+        artistField.setText(String.valueOf(firstTour.getArtist()));
+        titleField.setText(String.valueOf(firstTour.getTitle()));
+        peakField.setText(String.valueOf(firstTour.getPeakNumber()));
+        grossField.setText(String.valueOf(firstTour.getActualGross()));
+        yearField.setText(String.valueOf(firstTour.getYear()));
+        showField.setText(String.valueOf(firstTour.getShows()));
+
+        dataCounter.setText("1");
 
     }
 
