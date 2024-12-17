@@ -1,5 +1,6 @@
 package com.example.gui10v3;
 
+import javafx.scene.image.Image;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.Scanner;
@@ -8,6 +9,7 @@ public class Album extends Music {
     private Float totalCertifiedCopies;
     private Integer reportedSales;
     private String genre;
+    private Image albumImage;
     static  ArrayList<Album> allAlbums = new ArrayList<Album>();
 
 
@@ -19,7 +21,8 @@ public class Album extends Music {
     }
 
     public String getGenre() {return genre;}
-    public Integer getTotalReportedSales() {
+
+    public Integer getReportedSales() {
         return reportedSales;
     }
     public Float getTotalCertifiedCopies() {
@@ -29,10 +32,28 @@ public class Album extends Music {
         return allAlbums;
     }
 
+    public void setGenre(String genre) {
+        this.genre = genre;
+    }
 
+    public void setReportedSales(Integer reportedSales) {
+        this.reportedSales = reportedSales;
+    }
+
+    public void setTotalCertifiedCopies(Float totalCertifiedCopies) {
+        this.totalCertifiedCopies = totalCertifiedCopies;
+    }
+
+    public void setAlbumImage(Image albumImage) {
+        this.albumImage = albumImage;
+    }
+
+    public Image getAlbumImage() {
+        return albumImage;
+    }
 
     public String toString(){
-    return "Album title: " + getTitle()+ " Artist: " + getArtist()+ " Year: " + getYear() + " Genre: " + getGenre() + " Total Copies Sold: " + reportedSales + " Rank: " + getRank()+ " Total Certified Copies: "+ getTotalCertifiedCopies();
+    return "Album title: " + getTitle()+ " Artist: " + getArtist()+ " Year: " + getYear() + " Genre: " + getGenre() + " Total Copies Sold: " + getReportedSales() + " Rank: " + getRank()+ " Total Certified Copies: "+ getTotalCertifiedCopies();
     }
 
     public static void readAllData() throws Exception{

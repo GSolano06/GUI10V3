@@ -1,6 +1,7 @@
 module com.example.gui10v3 {
     requires javafx.controls;
     requires javafx.fxml;
+    requires java.desktop;
 
 
     opens com.example.gui10v3 to javafx.fxml;

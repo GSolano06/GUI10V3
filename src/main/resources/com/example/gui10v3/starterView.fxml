@@ -1,16 +1,25 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.geometry.Insets?>
-<?import javafx.scene.control.Label?>
-<?import javafx.scene.layout.VBox?>
-
 <?import javafx.scene.control.Button?>
-<VBox alignment="CENTER" spacing="20.0" xmlns:fx="http://javafx.com/fxml"
-      fx:controller="com.example.gui10v3.HelloController">
-    <padding>
-        <Insets bottom="20.0" left="20.0" right="20.0" top="20.0"/>
-    </padding>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
 
-    <Label fx:id="welcomeText"/>
-    <Button text="Hello!" onAction="#onHelloButtonClick"/>
-</VBox>
+
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.gui10v3.SuperController">
+   <children>
+      <HBox alignment="CENTER" layoutX="-6.0" layoutY="200.0" prefHeight="100.0" prefWidth="600.0" spacing="20.0">
+         <children>
+            <Button fx:id="songButton" mnemonicParsing="false" onAction="#changeToSong" prefHeight="79.0" prefWidth="150.0" text="Songs" />
+            <Button fx:id="tourButton" mnemonicParsing="false" onAction="#changeToTour" prefHeight="79.0" prefWidth="150.0" text="Tours" />
+            <Button fx:id="albumButton" mnemonicParsing="false" onAction="#changeToAlbum" prefHeight="79.0" prefWidth="150.0" text="Albums" />
+         </children>
+      </HBox>
+      <Text layoutX="33.0" layoutY="158.0" strokeType="OUTSIDE" strokeWidth="0.0" text="What would you like to see?">
+         <font>
+            <Font size="45.0" />
+         </font>
+      </Text>
+   </children>
+</Pane>

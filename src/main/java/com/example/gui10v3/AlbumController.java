@@ -3,7 +3,16 @@ package com.example.gui10v3;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.control.cell.TextFieldTableCell;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+import javafx.scene.input.KeyCode;
+import javafx.stage.FileChooser;
 import javafx.util.converter.IntegerStringConverter;
+import java.util.Scanner;
+
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 
 
 public class AlbumController {
@@ -17,7 +26,10 @@ public class AlbumController {
     public TableColumn<Album, String> column6; // genre
     public TableColumn<Album, String> column7; // total cert copies
 
-
+    public Button uploadButton;
+    public Button prevButton;
+    public Button nextButton;
+    public ImageView imageView;
 
     // search bar
     public TextField searchBar;
@@ -34,7 +46,7 @@ public class AlbumController {
 
     public void initialize() throws Exception {
         Album.readAllData();
-
+        uploadButton.setDisable(true);
         // set up columns
         column1.setCellValueFactory(new PropertyValueFactory<>("rank"));
         column2.setCellValueFactory(new PropertyValueFactory<>("title"));
@@ -43,6 +55,7 @@ public class AlbumController {
         column5.setCellValueFactory(new PropertyValueFactory<>("reportedSales"));
         column6.setCellValueFactory(new PropertyValueFactory<>("genre"));
         column7.setCellValueFactory(new PropertyValueFactory<>("totalCertifiedCopies"));
+
 
         // supposed to make editable
 
@@ -92,8 +105,24 @@ public class AlbumController {
         }
 
         tableView.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
+          uploadButton.setDisable(false);
+          prevButton.setDisable(false);
+          nextButton.setDisable(false);
             updateTextFields();
+            fillImage();
         } );
+
+        // make this work later
+        prevButton.setOnKeyPressed(e -> {
+            if (e.getCode() == KeyCode.KP_LEFT) {
+              previous();
+            }
+        });
+        prevButton.setOnKeyPressed(e -> {
+            if (e.getCode() == KeyCode.KP_RIGHT) {
+                next();
+            }
+        });
     }
 
    public void updateTextFields() {
@@ -108,6 +137,37 @@ public class AlbumController {
             rankingTextArea.setText("");
             titleTextArea.setText("");
         }
+    }
+
+    public void setUploadButton()throws FileNotFoundException {
+        Album selectedAlbum =  tableView.getSelectionModel().getSelectedItem();
+        FileChooser fileChooser = new FileChooser();
+        File selectedFile = fileChooser.showOpenDialog(tableView.getScene().getWindow());
+        FileInputStream input = new FileInputStream(selectedFile);
+        Image chosenImage = new Image(input);
+        imageView.setImage(chosenImage);
+        selectedAlbum.setAlbumImage(chosenImage);
+    }
+
+    public void fillImage(){
+        if (tableView.getSelectionModel().getSelectedItem().getAlbumImage() == null){
+            imageView.setImage(null);
+        }
+        else if(tableView.getSelectionModel().getSelectedItem().getAlbumImage()!= null){
+            imageView.setImage(tableView.getSelectionModel().getSelectedItem().getAlbumImage());
+        }
+    }
+
+    public void previous(){
+       Integer selectedIndex = tableView.getSelectionModel().getSelectedIndex();
+       tableView.getSelectionModel().clearAndSelect(selectedIndex-1);
+    }
+    public void next(){
+        Integer selectedIndex = tableView.getSelectionModel().getSelectedIndex();
+        tableView.getSelectionModel().clearAndSelect(selectedIndex+1);
+    }
+    public void search(){
+    // MAKE THIS WORK
     }
         }
 
