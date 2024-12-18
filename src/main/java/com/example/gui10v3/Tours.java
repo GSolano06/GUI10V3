@@ -1,6 +1,7 @@
 package com.example.gui10v3;
 
 import com.example.gui10v3.Music;
+import javafx.scene.image.Image;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -10,6 +11,7 @@ class Tours extends Music {
     private int peakNumber;
     private int actualGross;
     private int shows;
+    private Image tourImage;
 
     private static ArrayList<Tours> allTours = new ArrayList<Tours>();
 
@@ -21,6 +23,15 @@ class Tours extends Music {
     }
 
     //getters and setters
+
+    public Image getTourImage() {
+        return tourImage;
+    }
+
+    public void setTourImage(Image tourImage) {
+        this.tourImage = tourImage;
+    }
+
     public int getPeakNumber() {
         return peakNumber;
     }
@@ -57,6 +68,12 @@ class Tours extends Music {
 
     }
     static void readAllData() throws Exception {
+        if (getAllTours().size()>0) {
+            return;
+        }
+
+        System.out.println("READING TOURS");
+
         File dataTourData = new File("src/TourData");
         Scanner textScanner = new Scanner(dataTourData);
         textScanner.useDelimiter("\n");

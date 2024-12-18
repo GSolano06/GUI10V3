@@ -6,21 +6,21 @@
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.Pane?>
 
-<Pane fx:id="pane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="511.0" prefWidth="720.0" style="-fx-background-color: tan;" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.gui10v3.ToursController">
+<Pane fx:id="pane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="511.0" prefWidth="720.0" style="-fx-background-color: pink;" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.gui10v3.ToursController">
    <children>
       <ImageView fx:id="tourImage" fitHeight="270.0" fitWidth="243.0" layoutX="257.0" layoutY="131.0" pickOnBounds="true" preserveRatio="true" />
       <Button fx:id="previousButton" layoutX="62.0" layoutY="423.0" mnemonicParsing="false" onAction="#previousTour" prefHeight="11.0" prefWidth="175.0" text="previous" />
       <Button fx:id="nextButton" layoutX="514.0" layoutY="423.0" mnemonicParsing="false" onAction="#nextTour" prefHeight="25.0" prefWidth="150.0" text="next" />
-      <Button fx:id="addImage" layoutX="311.0" layoutY="472.0" mnemonicParsing="false" prefHeight="4.0" prefWidth="139.0" text="add image" />
-      <Button fx:id="saveButton" layoutX="646.0" layoutY="472.0" mnemonicParsing="false" text="save " />
+      <Button fx:id="addImage" layoutX="311.0" layoutY="472.0" mnemonicParsing="false" onAction="#insertImage" prefHeight="4.0" prefWidth="139.0" text="add image" />
+      <Button fx:id="returnButton" layoutX="567.0" layoutY="472.0" mnemonicParsing="false" onAction="#changeToHome" prefHeight="11.0" prefWidth="139.0" text="return to home screen" />
       <Label layoutX="265.0" layoutY="29.0" prefHeight="17.0" prefWidth="213.0" text="   -- Top 20 Highest Grossing Tours --" textFill="#c64e4e" />
-      <TextField fx:id="rankField" layoutX="291.0" layoutY="83.0" onAction="#tourData" />
-      <TextField fx:id="artistField" layoutX="77.0" layoutY="130.0" />
-      <TextField fx:id="peakField" layoutX="77.0" layoutY="209.0" />
-      <TextField fx:id="titleField" layoutX="509.0" layoutY="130.0" />
-      <TextField fx:id="grossField" layoutX="509.0" layoutY="209.0" />
-      <TextField fx:id="yearField" layoutX="77.0" layoutY="281.0" />
-      <TextField fx:id="showField" layoutX="509.0" layoutY="281.0" />
+      <TextField fx:id="rankField" layoutX="291.0" layoutY="83.0" onAction="#editData" />
+      <TextField fx:id="artistField" layoutX="77.0" layoutY="130.0" onAction="#editData" />
+      <TextField fx:id="peakField" layoutX="77.0" layoutY="209.0" onAction="#editData" />
+      <TextField fx:id="titleField" layoutX="509.0" layoutY="130.0" onAction="#editData" />
+      <TextField fx:id="grossField" layoutX="509.0" layoutY="209.0" onAction="#editData" />
+      <TextField fx:id="yearField" layoutX="77.0" layoutY="281.0" onAction="#editData" />
+      <TextField fx:id="showField" layoutX="509.0" layoutY="281.0" onAction="#editData" />
       <Label layoutX="328.0" layoutY="66.0" prefHeight="17.0" prefWidth="86.0" text="           Rank: " />
       <Label layoutX="122.0" layoutY="108.0" prefHeight="17.0" prefWidth="76.0" text="        Artist:" />
       <Label layoutX="109.0" layoutY="180.0" prefHeight="17.0" prefWidth="102.0" text="       Peak Spot:" />
@@ -28,8 +28,8 @@
       <Label layoutX="551.0" layoutY="108.0" prefHeight="17.0" prefWidth="76.0" text="     Tour Title: " />
       <Label layoutX="525.0" layoutY="180.0" prefHeight="17.0" prefWidth="128.0" text="           Actual  Gross:" />
       <Label layoutX="574.0" layoutY="257.0" text="Shows:" />
-      <TextField editable="false" layoutX="391.0" layoutY="423.0" prefHeight="25.0" prefWidth="32.0" text="20" />
-      <TextField fx:id="dataCounter" editable="false" layoutX="339.0" layoutY="423.0" prefHeight="25.0" prefWidth="32.0" text="0" />
+      <TextField fx:id="outOfCounter" editable="false" layoutX="391.0" layoutY="423.0" prefHeight="25.0" prefWidth="32.0" />
+      <TextField fx:id="dataCounter" editable="false" layoutX="339.0" layoutY="423.0" prefHeight="25.0" prefWidth="32.0" />
       <Label layoutX="379.0" layoutY="427.0" prefHeight="17.0" prefWidth="0.0" text="/" textFill="#c64e4e" />
       <Label layoutX="317.0" layoutY="427.0" text="--" textFill="#c64e4e" />
       <Label layoutX="436.0" layoutY="427.0" text="--" textFill="#c64e4e" />
