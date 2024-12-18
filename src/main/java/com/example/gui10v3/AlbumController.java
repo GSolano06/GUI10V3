@@ -1,5 +1,7 @@
 package com.example.gui10v3;
 
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.control.cell.TextFieldTableCell;
@@ -7,7 +9,10 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
 import javafx.stage.FileChooser;
+import javafx.stage.Stage;
 import javafx.util.converter.IntegerStringConverter;
+
+import java.util.ArrayList;
 import java.util.Scanner;
 
 import java.io.File;
@@ -29,6 +34,7 @@ public class AlbumController {
     public Button uploadButton;
     public Button prevButton;
     public Button nextButton;
+    public Button backButton;
     public ImageView imageView;
 
     // search bar
@@ -123,6 +129,8 @@ public class AlbumController {
                 next();
             }
         });
+//MAKE THIS WORK
+
     }
 
    public void updateTextFields() {
@@ -166,8 +174,29 @@ public class AlbumController {
         Integer selectedIndex = tableView.getSelectionModel().getSelectedIndex();
         tableView.getSelectionModel().clearAndSelect(selectedIndex+1);
     }
+
+
     public void search(){
-    // MAKE THIS WORK
+    Scanner textScanner = new Scanner(System.in);
+    searchBar.textProperty().addListener((observable, oldValue, newValue) ->{
+        System.out.println("textfield changed from " + oldValue + " to " + newValue);
+        for (Album thisAlbum: Album.allAlbums){
+            if(thisAlbum.getTitle().contains(newValue)){
+                tableView.getSelectionModel().clearAndSelect(thisAlbum.getRank()-1);
+                System.out.println("album found: "+ thisAlbum.getTitle());
+            }
+        }
+    });
+    }
+
+
+    public void setBackButton() throws Exception{
+        FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("starterView.fxml"));
+        Scene scene = new Scene(fxmlLoader.load(), 600, 400);
+        Stage songStage = (Stage)nextButton.getScene().getWindow();
+        songStage.setTitle("Home");
+        songStage.setScene(scene);
+        songStage.show();
     }
         }
 

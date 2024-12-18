@@ -11,7 +11,7 @@
    <children>
       <HBox alignment="CENTER" layoutX="-6.0" layoutY="200.0" prefHeight="100.0" prefWidth="600.0" spacing="20.0">
          <children>
-            <Button fx:id="songButton" mnemonicParsing="false" onAction="#changeToSong" prefHeight="79.0" prefWidth="150.0" text="Songs" />
+            <Button fx:id="songButton" mnemonicParsing="false" prefHeight="79.0" prefWidth="150.0" text="Songs" />
             <Button fx:id="tourButton" mnemonicParsing="false" onAction="#changeToTour" prefHeight="79.0" prefWidth="150.0" text="Tours" />
             <Button fx:id="albumButton" mnemonicParsing="false" onAction="#changeToAlbum" prefHeight="79.0" prefWidth="150.0" text="Albums" />
          </children>

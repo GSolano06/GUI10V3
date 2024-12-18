@@ -10,7 +10,7 @@ public class Album extends Music {
     private Integer reportedSales;
     private String genre;
     private Image albumImage;
-    static  ArrayList<Album> allAlbums = new ArrayList<Album>();
+    public static  ArrayList<Album> allAlbums = new ArrayList<Album>();
 
 
     public Album(String artist, String year, Integer rank, String title, Float totalCertifiedCopies, Integer reportedSales, String genre) {
