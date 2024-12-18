@@ -4,19 +4,18 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.MenuButton?>
 <?import javafx.scene.control.MenuItem?>
-<?import javafx.scene.control.TextArea?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.StackPane?>
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="330.0" prefWidth="601.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1">
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="330.0" prefWidth="601.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.gui10v3.SongController">
    <children>
-      <TextField layoutX="205.0" layoutY="21.0" prefHeight="26.0" prefWidth="159.0" />
+      <TextField fx:id="rankText" layoutX="205.0" layoutY="21.0" onAction="#rankChanged" prefHeight="26.0" prefWidth="159.0" />
       <Label layoutX="145.0" layoutY="25.0" text="Rank" />
-      <Button layoutX="134.0" layoutY="254.0" mnemonicParsing="false" prefHeight="62.0" prefWidth="102.0" text="Previous" />
-      <Button layoutX="308.0" layoutY="254.0" mnemonicParsing="false" prefHeight="62.0" prefWidth="112.0" text="Next" />
-      <TextField layoutX="205.0" layoutY="61.0" prefHeight="26.0" prefWidth="159.0" />
+      <Button fx:id="previousButton" layoutX="138.0" layoutY="246.0" mnemonicParsing="false" onAction="#previousData" prefHeight="62.0" prefWidth="112.0" text="Previous" />
+      <Button fx:id="nextButton" layoutX="285.0" layoutY="246.0" mnemonicParsing="false" onAction="#nextData" prefHeight="62.0" prefWidth="112.0" text="Next" />
+      <TextField fx:id="artistText" layoutX="205.0" layoutY="61.0" onAction="#artistChanged" prefHeight="26.0" prefWidth="159.0" />
       <Label layoutX="145.0" layoutY="65.0" text="Artist" />
       <MenuButton layoutX="14.0" layoutY="8.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="112.0" text="File">
         <items>
@@ -26,11 +25,16 @@
       </MenuButton>
       <StackPane layoutX="387.0" layoutY="61.0" prefHeight="150.0" prefWidth="200.0">
          <children>
-            <Button mnemonicParsing="false" style="-fx-background-color: transparent;" text="Upload Image" textFill="#2139b5" />
-            <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" />
+            <ImageView fx:id="choosenIv" fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" />
+            <Button fx:id="imageUploadButton" mnemonicParsing="false" onAction="#imageUpload" style="-fx-background-color: transparent;" text="Upload Image" textFill="#2139b5" />
          </children>
       </StackPane>
-      <TextArea layoutX="185.0" layoutY="124.0" prefHeight="122.0" prefWidth="200.0" />
-      <Label layoutX="264.0" layoutY="98.0" text="Full Info" />
+      <Label layoutX="147.0" layoutY="100.0" text="Title" />
+      <Label layoutX="147.0" layoutY="136.0" text="Release Date" />
+      <Label layoutX="147.0" layoutY="171.0" text="Streams" />
+      <TextField fx:id="titleText" layoutX="205.0" layoutY="96.0" onAction="#titleChanged" prefHeight="26.0" prefWidth="159.0" />
+      <TextField fx:id="dateText" layoutX="221.0" layoutY="132.0" onAction="#dateChanged" prefHeight="26.0" prefWidth="159.0" />
+      <TextField fx:id="streamText" layoutX="206.0" layoutY="167.0" onAction="#streamsChanged" prefHeight="26.0" prefWidth="159.0" />
+      <Label layoutX="371.0" layoutY="172.0" text="billion" />
    </children>
 </Pane>

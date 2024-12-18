@@ -1,5 +1,7 @@
 package com.example.gui10v3;
 
+import javafx.scene.image.Image;
+
 import java.io.File;
 import java.util.ArrayList;
 import java.util.Scanner;
@@ -8,8 +10,17 @@ public class Song extends Music {
 
    static ArrayList<Song> allSongs = new ArrayList<Song>();
     Double streams;
+    Image songCoverImage;
 
-    private Double getStreams() {
+    public Image getSongCoverImage() {
+        return songCoverImage;
+    }
+
+    public void setSongCoverImage(Image songCoverImage) {
+        this.songCoverImage = songCoverImage;
+    }
+
+    public Double getStreams() {
         return streams;
     }
 
@@ -22,6 +33,10 @@ public class Song extends Music {
     public String toString(){
             String musicString = super.toString();
             return  "Song " + musicString + " with " + streams + " billion streams";
+    }
+
+    public void setStreams(Double streams) {
+        this.streams = streams;
     }
 
     static String newest() {
