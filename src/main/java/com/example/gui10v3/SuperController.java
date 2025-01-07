@@ -14,9 +14,9 @@ public void initialize(){
 }
 
     public void changeToSong() throws Exception{
-        FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("songsView.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("songView.fxml"));
         Scene scene = new Scene(fxmlLoader.load(), 800, 600);
-       Stage songStage = (Stage)songButton.getScene().getWindow();
+        Stage songStage = (Stage)songButton.getScene().getWindow();
         songStage.setTitle("Top Songs");
         songStage.setScene(scene);
         songStage.show();

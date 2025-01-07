@@ -1,6 +1,10 @@
 package com.example.gui10v3;
 
-public class Music {
+import javafx.scene.image.Image;
+
+import java.io.Serializable;
+
+public class Music implements Serializable {
     private String artist;
     private String year;
     private Integer rank;

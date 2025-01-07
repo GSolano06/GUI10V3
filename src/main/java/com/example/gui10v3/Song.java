@@ -1,16 +1,19 @@
 package com.example.gui10v3;
 
+import javafx.embed.swing.SwingFXUtils;
 import javafx.scene.image.Image;
 
-import java.io.File;
+import javax.imageio.ImageIO;
+import java.io.*;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-public class Song extends Music {
+public class Song extends Music implements Serializable {
 
    static ArrayList<Song> allSongs = new ArrayList<Song>();
     Double streams;
-    Image songCoverImage;
+    transient Image songCoverImage;
+    private static final long serialVersionUID = 1L;
 
     public Image getSongCoverImage() {
         return songCoverImage;
@@ -95,6 +98,52 @@ public class Song extends Music {
 
     }
 
+    static void saveData() throws Exception {
+        FileOutputStream fileOut = new FileOutputStream("SavedSongFile");
+        ObjectOutputStream objectOut = new ObjectOutputStream(fileOut);
+        objectOut.writeObject(allSongs);
+        objectOut.close();
+        fileOut.close();
+
+
 }
+    static void restoreData() throws Exception {
+        FileInputStream fileIn = new FileInputStream("SavedSongFile");
+        ObjectInputStream objectIn = new ObjectInputStream(fileIn);
+        allSongs = (ArrayList<Song>)objectIn.readObject();
+        objectIn.close();
+        fileIn.close();
+    }
+
+    @Serial
+    private void writeObject(ObjectOutputStream s) throws IOException {
+        // write NON-transient fields
+        s.defaultWriteObject();
+        // write transient fields
+        if (songCoverImage != null) {
+            ImageIO.write(SwingFXUtils.fromFXImage(songCoverImage, null), "png", s);
+        }
+    }
+
+    @Serial
+    private void readObject(ObjectInputStream s) throws IOException, ClassNotFoundException {
+// read NON-transient fields
+        s.defaultReadObject();
+        // read transient fields
+        Image maybeSongCover = null;
+        try {
+            maybeSongCover = SwingFXUtils.toFXImage(ImageIO.read(s), null);
+        } catch (Exception ex) {
+            // do nothing
+        }
+        songCoverImage = maybeSongCover;
+    }
+
+
+
+}
+
+
+
 
 

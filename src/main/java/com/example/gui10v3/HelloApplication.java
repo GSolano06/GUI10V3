@@ -20,4 +20,10 @@ public class HelloApplication extends Application {
     public static void main(String[] args) {
         launch();
     }
+
+    public void stop() throws Exception {
+        Song.saveData();
+        Song.restoreData();
+    }
+
 }

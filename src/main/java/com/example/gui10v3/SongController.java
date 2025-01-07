@@ -1,6 +1,8 @@
 package com.example.gui10v3;
 
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.MenuButton;
 import javafx.scene.control.TextArea;
@@ -9,6 +11,7 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.text.Text;
 import javafx.stage.FileChooser;
+import javafx.stage.Stage;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -29,12 +32,32 @@ public class SongController {
     public Button previousButton;
     public Button nextButton;
     public Button imageUploadButton;
+    public Button backButton;
     public MenuButton fileMenu;
     static int currentSongNumber = 0;
 
 
 public void initialize() throws Exception {
-    Song.readAllSongData();
+    if (Song.allSongs.isEmpty()) {
+        try {
+// only restore saved Objects ONCE
+            Song.restoreData();
+        } catch (Exception ex) {
+            System.out.println("NO SAVED OBJECTS WERE RESTORED: " + ex);
+        }
+
+        if (Song.allSongs.isEmpty()) {
+            try {
+                // only import films' data if there are NO saved Objects
+                Song.readAllSongData();
+                System.out.println("DATA IMPORTED");
+            } catch (Exception ex) {
+                System.out.println("DATA NOT IMPORTED: " + ex);
+            }
+        } else {
+            System.out.println("SAVED OBJECTS RESTORED");
+        }
+    }
 
 Song firstSong = Song.allSongs.get(currentSongNumber);
     rankText.setText(String.valueOf(firstSong.getRank()));
@@ -143,4 +166,13 @@ Song firstSong = Song.allSongs.get(currentSongNumber);
         currentSong.setYear(newDate);
 
     }
+    public void setBackButton() throws Exception{
+        FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("starterView.fxml"));
+        Scene scene = new Scene(fxmlLoader.load(), 600, 400);
+        Stage songStage = (Stage)nextButton.getScene().getWindow();
+        songStage.setTitle("Home");
+        songStage.setScene(scene);
+        songStage.show();
+    }
+
 }

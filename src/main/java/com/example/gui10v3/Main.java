@@ -5,7 +5,6 @@ import java.util.ArrayList;
 public class Main {
     public static void main(String[] args) throws Exception {
         Song.readAllSongData();
-        //Song.describeAllSongs();
         Tours.readAllData();
         Tours.describeAllTours();
 

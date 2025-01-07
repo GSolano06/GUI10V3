@@ -36,5 +36,6 @@
       <TextField fx:id="dateText" layoutX="221.0" layoutY="132.0" onAction="#dateChanged" prefHeight="26.0" prefWidth="159.0" />
       <TextField fx:id="streamText" layoutX="206.0" layoutY="167.0" onAction="#streamsChanged" prefHeight="26.0" prefWidth="159.0" />
       <Label layoutX="371.0" layoutY="172.0" text="billion" />
+      <Button layoutX="439.0" layoutY="246.0" mnemonicParsing="false" onAction="#setBackButton" prefHeight="62.0" prefWidth="112.0" text="Back to home" />
    </children>
 </Pane>
