@@ -36,7 +36,28 @@ public class ToursController {
     static int currentTourNumber = 0;
 
     public void initialize() throws Exception {
-        Tours.readAllData();
+        //Tours.readAllData();
+        if (Tours.getAllTours().isEmpty()) {
+            try {
+// only restore saved Objects ONCE
+                Tours.restoreData();
+            } catch (Exception ex) {
+                System.out.println("NO SAVED OBJECTS WERE RESTORED: " + ex);
+            }
+
+            if (Tours.getAllTours().isEmpty()) {
+                try {
+                    // only import films' data if there are NO saved Objects
+                    Tours.readAllData();
+                    System.out.println("DATA IMPORTED");
+                } catch (Exception ex) {
+                    System.out.println("DATA NOT IMPORTED: " + ex);
+                }
+            } else {
+                System.out.println("SAVED OBJECTS RESTORED");
+            }
+        }
+
 
         Tours firstTour = Tours.getAllTours().get(currentTourNumber);
         rankField.setText(String.valueOf(firstTour.getRank()));
@@ -49,32 +70,33 @@ public class ToursController {
 
         dataCounter.setText(String.valueOf(currentTourNumber + 1));
         outOfCounter.setText(String.valueOf(Tours.getAllTours().size()));
+        tourImage.setImage(firstTour.getTourImage());
 
-       // saveButton.setDisable(true);
+        // saveButton.setDisable(true);
 
     }
 
     public void previousTour() throws Exception {
-        if(currentTourNumber > 0) {
+        if (currentTourNumber > 0) {
             currentTourNumber = currentTourNumber - 1;
         } else {
-            currentTourNumber = Tours.getAllTours().size()-1;
+            currentTourNumber = Tours.getAllTours().size() - 1;
         }
 
-            Tours previousTour = Tours.getAllTours().get(currentTourNumber);
-            rankField.setText(String.valueOf(previousTour.getRank()));
-            artistField.setText(String.valueOf(previousTour.getArtist()));
-            titleField.setText(String.valueOf(previousTour.getTitle()));
-            peakField.setText(String.valueOf(previousTour.getPeakNumber()));
-            grossField.setText(String.valueOf(previousTour.getActualGross()));
-            yearField.setText(String.valueOf(previousTour.getYear()));
-            showField.setText(String.valueOf(previousTour.getShows()));
+        Tours previousTour = Tours.getAllTours().get(currentTourNumber);
+        rankField.setText(String.valueOf(previousTour.getRank()));
+        artistField.setText(String.valueOf(previousTour.getArtist()));
+        titleField.setText(String.valueOf(previousTour.getTitle()));
+        peakField.setText(String.valueOf(previousTour.getPeakNumber()));
+        grossField.setText(String.valueOf(previousTour.getActualGross()));
+        yearField.setText(String.valueOf(previousTour.getYear()));
+        showField.setText(String.valueOf(previousTour.getShows()));
 
-         dataCounter.setText(String.valueOf(currentTourNumber + 1));
+        dataCounter.setText(String.valueOf(currentTourNumber + 1));
 
         //Tours currentTour = Tours.getAllTours().get(currentTourNumber);
         tourImage.setImage(previousTour.getTourImage());
-        
+
 
     }
 
@@ -84,68 +106,69 @@ public class ToursController {
         } else {
             currentTourNumber = 0;
         }
-            Tours currentTour = Tours.getAllTours().get(currentTourNumber);
-            rankField.setText(String.valueOf(currentTour.getRank()));
-            artistField.setText(String.valueOf(currentTour.getArtist()));
-            titleField.setText(String.valueOf(currentTour.getTitle()));
-            peakField.setText(String.valueOf(currentTour.getPeakNumber()));
-            grossField.setText(String.valueOf(currentTour.getActualGross()));
-            yearField.setText(String.valueOf(currentTour.getYear()));
-            showField.setText(String.valueOf(currentTour.getShows()));
+        Tours currentTour = Tours.getAllTours().get(currentTourNumber);
+        rankField.setText(String.valueOf(currentTour.getRank()));
+        artistField.setText(String.valueOf(currentTour.getArtist()));
+        titleField.setText(String.valueOf(currentTour.getTitle()));
+        peakField.setText(String.valueOf(currentTour.getPeakNumber()));
+        grossField.setText(String.valueOf(currentTour.getActualGross()));
+        yearField.setText(String.valueOf(currentTour.getYear()));
+        showField.setText(String.valueOf(currentTour.getShows()));
 
         dataCounter.setText(String.valueOf(currentTourNumber + 1));
         tourImage.setImage(currentTour.getTourImage());
 
-        }
-
-        public void editData() throws Exception {
-            String newTitle = titleField.getText();
-            Tours currentTour = Tours.getAllTours().get(currentTourNumber);
-            currentTour.setTitle(newTitle);
-
-            String newRank = rankField.getText();
-            currentTour.setRank(Integer.valueOf(newRank));
-
-            String newArtist = artistField.getText();
-            currentTour.setArtist(newArtist);
-
-            String newPeak = peakField.getText();
-            currentTour.setPeakNumber(Integer.valueOf(newPeak));
-
-            String newGross = grossField.getText();
-            currentTour.setActualGross(Integer.valueOf(newGross));
-
-            String newYear = yearField.getText();
-            currentTour.setYear(newYear);
-
-            String newShow = showField.getText();
-            currentTour.setShows(Integer.valueOf(newShow));
-
-        }
-
-        public void insertImage () throws Exception {
-            Tours currentTour = Tours.getAllTours().get(currentTourNumber);
-
-            File selectedFile = fileChooser.showOpenDialog(tourImage.getScene().getWindow());
-            FileInputStream selectedFIS = new FileInputStream(selectedFile);
-            Image randomImage = new Image(selectedFIS);
-            currentTour.setTourImage(randomImage);
-            tourImage.setImage(randomImage);
-        }
-
-        public void changeToHome () throws Exception {
-            FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("starterView.fxml"));
-            Scene scene = new Scene(fxmlLoader.load(), 800, 600);
-            Stage homeStage = (Stage)returnButton.getScene().getWindow();
-            homeStage.setTitle("Learn About Music");
-            homeStage.setScene(scene);
-            homeStage.show();
-        }
-
-
-
-
     }
+
+    public void editData() throws Exception {
+        String newTitle = titleField.getText();
+        Tours currentTour = Tours.getAllTours().get(currentTourNumber);
+        currentTour.setTitle(newTitle);
+
+        String newRank = rankField.getText();
+        currentTour.setRank(Integer.valueOf(newRank));
+
+        String newArtist = artistField.getText();
+        currentTour.setArtist(newArtist);
+
+        String newPeak = peakField.getText();
+        currentTour.setPeakNumber(Integer.valueOf(newPeak));
+
+        String newGross = grossField.getText();
+        currentTour.setActualGross(Integer.valueOf(newGross));
+
+        String newYear = yearField.getText();
+        currentTour.setYear(newYear);
+
+        String newShow = showField.getText();
+        currentTour.setShows(Integer.valueOf(newShow));
+
+        currentTour.setTourImage(tourImage.getImage());
+    }
+
+    public void insertImage() throws Exception {
+        Tours currentTour = Tours.getAllTours().get(currentTourNumber);
+
+        File selectedFile = fileChooser.showOpenDialog(tourImage.getScene().getWindow());
+        FileInputStream selectedFIS = new FileInputStream(selectedFile);
+        Image randomImage = new Image(selectedFIS);
+        currentTour.setTourImage(randomImage);
+        tourImage.setImage(randomImage);
+    }
+
+    public void changeToHome() throws Exception {
+        FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("starterView.fxml"));
+        Scene scene = new Scene(fxmlLoader.load(), 800, 600);
+        Stage homeStage = (Stage) returnButton.getScene().getWindow();
+        homeStage.setTitle("Learn About Music");
+        homeStage.setScene(scene);
+        homeStage.show();
+    }
+
+
+
+
+}
 
 
 

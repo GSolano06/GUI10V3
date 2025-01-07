@@ -25,6 +25,8 @@ public class HelloApplication extends Application {
         Song.saveData();
         Song.restoreData();
 
+        Tours.saveData();
+
         Album.saveData();
     }
 }

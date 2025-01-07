@@ -1,17 +1,20 @@
 package com.example.gui10v3;
 
 import com.example.gui10v3.Music;
+import javafx.embed.swing.SwingFXUtils;
 import javafx.scene.image.Image;
 
-import java.io.File;
+import javax.imageio.ImageIO;
+import java.io.*;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-class Tours extends Music {
+class Tours extends Music implements Serializable{
+    private static final long serialVersionUID = 1L;
     private int peakNumber;
     private int actualGross;
     private int shows;
-    private Image tourImage;
+    private transient Image tourImage;
 
     private static ArrayList<Tours> allTours = new ArrayList<Tours>();
 
@@ -137,7 +140,51 @@ class Tours extends Music {
                 System.out.println(eachTour);
             }
         }
+
+    static void saveData() throws Exception {
+        FileOutputStream fileOut = new FileOutputStream("SavedTourObjects");
+        ObjectOutputStream objectOut = new ObjectOutputStream(fileOut);
+        objectOut.writeObject(allTours);
+        objectOut.close();
+        fileOut.close();
     }
+    static void restoreData() throws Exception {
+        FileInputStream fileIn = new FileInputStream("SavedTourObjects");
+        ObjectInputStream objectIn = new ObjectInputStream(fileIn);
+        allTours = (ArrayList<Tours>)objectIn.readObject();
+        objectIn.close();
+        fileIn.close();
+    }
+    // implements custom serialize for
+    //     transient posterImage field
+    @Serial
+    private void writeObject(ObjectOutputStream s) throws IOException {
+        // write NON-transient fields
+        s.defaultWriteObject();
+        // write transient fields
+        if (tourImage != null) {
+            ImageIO.write(SwingFXUtils.fromFXImage(tourImage, null), "png", s);
+        }
+
+    }
+    // implements custom deserialize for
+//     transient posterImage field
+    @Serial
+    private void readObject(ObjectInputStream s) throws IOException, ClassNotFoundException {
+// read NON-transient fields
+        s.defaultReadObject();
+        // read transient fields
+        Image maybePoster = null;
+        try {
+            maybePoster = SwingFXUtils.toFXImage(ImageIO.read(s), null);
+        } catch (Exception ex) {
+            // do nothing
+        }
+        tourImage = maybePoster;
+    }
+
+
+}
 
 
 
