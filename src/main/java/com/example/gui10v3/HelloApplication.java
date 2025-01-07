@@ -11,7 +11,7 @@ public class HelloApplication extends Application {
     @Override
     public void start(Stage stage) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("starterView.fxml"));
-        Scene scene = new Scene(fxmlLoader.load(), 800, 600);
+        Scene scene = new Scene(fxmlLoader.load(), 600, 400);
         stage.setTitle("Learn About Music");
         stage.setScene(scene);
         stage.show();
@@ -26,4 +26,8 @@ public class HelloApplication extends Application {
         Song.restoreData();
     }
 
+
+    public void stop() throws Exception {
+        Album.saveData();
+    }
 }
