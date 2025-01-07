@@ -1,6 +1,9 @@
 package com.example.gui10v3;
 
-public class Music {
+import java.io.Serializable;
+
+public class Music implements Serializable {
+    private static final long serialVersionUID = 1L;
     private String artist;
     private String year;
     private Integer rank;

@@ -1,15 +1,19 @@
 package com.example.gui10v3;
 
+import javafx.embed.swing.SwingFXUtils;
 import javafx.scene.image.Image;
-import java.io.File;
+
+import javax.imageio.ImageIO;
+import java.io.*;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-public class Album extends Music {
+public class Album extends Music implements Serializable {
+    private static final long serialVersionUID = 1L;
     private Float totalCertifiedCopies;
     private Integer reportedSales;
     private String genre;
-    private Image albumImage;
+    private transient Image albumImage;
     public static  ArrayList<Album> allAlbums = new ArrayList<Album>();
 
 
@@ -105,11 +109,53 @@ public class Album extends Music {
 
             Album newAlbum = new Album(data1, data3, currentRank, data2, floatdata5, intdata6*1000000, data4);
             allAlbums.add(newAlbum);
-            System.out.println(newAlbum);
+           // System.out.println(newAlbum);
 
 
 
         }
 
     }
+    static void saveData() throws Exception {
+        FileOutputStream fileOut = new FileOutputStream("SavedAlbumsFile");
+        ObjectOutputStream objectOut = new ObjectOutputStream(fileOut);
+        objectOut.writeObject(allAlbums);
+        objectOut.close();
+        fileOut.close();
+    }
+
+    static void restoreData() throws Exception {
+        FileInputStream fileIn = new FileInputStream("SavedAlbumsFile");
+        ObjectInputStream objectIn = new ObjectInputStream(fileIn);
+        allAlbums = (ArrayList<Album>)objectIn.readObject();
+        objectIn.close();
+        fileIn.close();
+    }
+
+    @Serial
+    private void writeObject(ObjectOutputStream s) throws IOException {
+        // write NON-transient fields
+        s.defaultWriteObject();
+        // write transient fields
+        if (albumImage != null) {
+            ImageIO.write(SwingFXUtils.fromFXImage(albumImage, null), "png", s);
+        }
+    }
+
+    // implements custom deserialize for
+//     transient posterImage field
+    @Serial
+    private void readObject(ObjectInputStream s) throws IOException, ClassNotFoundException {
+// read NON-transient fields
+        s.defaultReadObject();
+        // read transient fields
+        Image maybeAlbumImage = null;
+        try {
+            maybeAlbumImage = SwingFXUtils.toFXImage(ImageIO.read(s), null);
+        } catch (Exception ex) {
+            // do nothing
+        }
+        albumImage = maybeAlbumImage;
+    }
+
 }

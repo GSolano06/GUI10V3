@@ -51,7 +51,27 @@ public class AlbumController {
     public TextArea yearTextArea;
 
     public void initialize() throws Exception {
-        Album.readAllData();
+        if (Album.getAllAlbums().isEmpty()) {
+            try {
+// only restore saved Objects ONCE
+                Album.restoreData();
+            } catch (Exception ex) {
+                System.out.println("NO SAVED OBJECTS WERE RESTORED: " + ex);
+            }
+
+            if (Album.getAllAlbums().isEmpty()) {
+                try {
+                    // only import films' data if there are NO saved Objects
+                    Album.readAllData();
+                    System.out.println("DATA IMPORTED");
+                } catch (Exception ex) {
+                    System.out.println("DATA NOT IMPORTED: " + ex);
+                }
+            } else {
+                System.out.println("SAVED OBJECTS RESTORED");
+            }
+        }
+
         uploadButton.setDisable(true);
         // set up columns
         column1.setCellValueFactory(new PropertyValueFactory<>("rank"));
