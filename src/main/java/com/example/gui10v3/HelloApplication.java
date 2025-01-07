@@ -24,10 +24,7 @@ public class HelloApplication extends Application {
     public void stop() throws Exception {
         Song.saveData();
         Song.restoreData();
-    }
 
-
-    public void stop() throws Exception {
         Album.saveData();
     }
 }
